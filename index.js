@@ -2,6 +2,7 @@ let num_rounds= 19;
 let timerStretch = 33;
 let timerRest = 10;
 let intervalId;
+let seconds;
 
 const timer = document.getElementById('timer');
 const rounds = document.getElementById('rounds');
@@ -11,6 +12,7 @@ const pauseBtn = document.getElementById('pauseBtn');
 function CountDown(seconds){
 
     timer.textContent = seconds; //print on the screen the current seconds value
+
 
     if (seconds < 0) {  //check if time's up and if it is clear the memory and print "Time's Up!"
         clearInterval(intervalId);
@@ -31,9 +33,16 @@ function startCountDown(seconds){
 
 }
 
+function pauseCountDown(){
+    rounds.textContent = `seconds is: ${seconds};`  
+}
+
 //click the button and call the startCountDown function
-startBtn.addEventListener("click",()=>startCountDown(15));
+startBtn.addEventListener("click",()=>startCountDown(5));
+pauseBtn.addEventListener("click",pauseCountDown);
+
+
 
 /* NOTES! 
-for some reason if i don't write the calling of a function as an arrow function it calls it automatically without me pressing the button
+ if I have an eventlistener and my function has arguments I have to call it as an arrown function.
  */
