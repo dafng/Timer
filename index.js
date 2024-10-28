@@ -9,8 +9,30 @@ const rounds = document.getElementById('rounds');
 const startBtn = document.getElementById('startBtn');
 const pauseBtn = document.getElementById('pauseBtn');
 
+function startCountDown(initialseconds){
+
+    if(intervalId){ //clear the memory
+        clearInterval(intervalId);
+    }
+    
+    //start the CountDown
+    intervalId = setInterval(() => {CountDown(initialseconds); //call the CountDown function
+                                    initialseconds--; // decrement the initial seconds
+                                    }, 1000); 
+
+    //alternative way
+    /*
+    seconds = initialseconds;
+    intervalId = setInterval(() => {CountDown(seconds);
+                                    seconds --;
+                                }, 1000);
+    */
+    
+}
+
 function CountDown(currentseconds){
 
+    seconds = currentseconds;
     timer.textContent = currentseconds; //print on the screen the current seconds value
 
 
@@ -21,20 +43,11 @@ function CountDown(currentseconds){
     }
 } 
 
-function startCountDown(initialseconds){
-    //let seconds = 5; //initialize the amount of seconds to countdown
-
+function pauseCountDown(){
+    rounds.textContent = `seconds is: ${seconds};`
     if(intervalId){ //clear the memory
         clearInterval(intervalId);
     }
-    seconds = initialseconds;
-    //start the countdown
-    intervalId = setInterval(() => CountDown(seconds--), 1000); //CountDown(seconds--) first the function is called with the value seconds and after it is called seconds-- is performed
-
-}
-
-function pauseCountDown(){
-    rounds.textContent = `seconds is: ${seconds};`  
 }
 
 //click the button and call the startCountDown function
@@ -45,4 +58,8 @@ pauseBtn.addEventListener("click",pauseCountDown);
 
 /* NOTES! 
  if I have an eventlistener and my function has arguments I have to call it as an arrown function.
+ */
+
+ /*TODO
+ add a resume button
  */
